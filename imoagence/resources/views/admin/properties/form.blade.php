@@ -5,6 +5,7 @@
 
 @section('content')
 
+
 <h1>@yield('title')</h1>
 
 <form class="vstack gap-2" action="{{route($property->exists ? 'admin.property.update' : 'admin.property.store', $property) }}" method="post">
@@ -32,11 +33,12 @@
         @include('shared.input', ['class' => 'col', 'label' => 'Ville', 'name' => 'city', 'value' => $property->city])
         @include('shared.input', ['class' => 'col', 'label' => 'Code Postal', 'name' => 'postal_code', 'value' => $property->postal_code])
     </div>
+    @include('shared.select', ['label' => 'Options', 'name' => 'options', 'value' => $property->options()->pluck('id'), 'multiple' => true])
     @include('shared.checkbox', ['label' => 'Vendu', 'name' => 'sold', 'value' => $property->sold])
 
 
     <div>
-        <button class="btn btn-primary">
+        <button type="submit" class="btn btn-primary">
             @if($property->exists)
                 Modifier
             @else 
